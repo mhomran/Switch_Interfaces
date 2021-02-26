@@ -65,7 +65,8 @@
 typedef enum
 {
 	LOW, /**< Defines digital state ground */
-	HIGH /**< Defines digital state power */
+	HIGH, /**< Defines digital state power */
+	MAX_DIO_PIN_STATE /**< Number of states */
 }DioPinState_t;
 
 /**

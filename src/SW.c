@@ -12,8 +12,8 @@
 #include <inttypes.h>
 /// @endcond
 #include "SW.h"
+#include "Dio.h"
 #include "SW_cfg.h"
-#include "RuntimeError.h"
 
 /**********************************************************************
 * Module Variable Definitions
@@ -22,10 +22,23 @@ static SWConfig_t * gConfig;
 /**********************************************************************
 * Function Definitions
 **********************************************************************/
+/*********************************************************************
+* Function : SW_Init()
+*//**
+* \b Description: Initialization function for the SW module<br/>
+* \b PRE-CONDITION: Configuration table is populated<br/>
+* @param Config a pointer to the configuration table of the switches.
+* @return void 
+**********************************************************************/
 void 
 SW_Init(const SWConfig_t * const Config)
 {
-	gConfig = Config;
+	if(Config == 0x0) 
+		{
+			//choose your error handling method
+		}
+
+	gConfig = (SWConfig_t *)Config;
 
 	for(int i = 0; i < NUM_SWITCHES; i++) 
 		{
@@ -33,9 +46,33 @@ SW_Init(const SWConfig_t * const Config)
 		}
 }
 
-SW_STATE_t SW_GetState(uint8_t Index) 
+/**
+ * @brief Getter to the switch state
+ * 
+ * @param Index the index of a switch inside the configuration table.
+ * @return SWState_t The state of the switch
+ */
+SWState_t
+SW_GetState(uint8_t Index) 
 {
 	return gConfig[Index].State;
+}
+
+/**
+ * @brief Setter to the switch state
+ * 
+ * @param Index the index of a switch inside the configuration table.
+ * @param State The state of the switch
+ */
+void 
+SW_SetState(uint8_t Index, SWState_t State) 
+{
+	if(!(State < MAX_SW_STATE && Index < NUM_SWITCHES)) 
+		{
+			//TODO:choose your error handling method
+			return;
+		}
+	gConfig[Index].State = State;
 }
 
 /*********************************************************************
@@ -50,47 +87,55 @@ SW_STATE_t SW_GetState(uint8_t Index)
 *
 * @see SW_Init
 **********************************************************************/
-static void SW_NormalUpdate(DioPinState_t PinValue, SW_STATE_t* state)
+static void SW_NormalUpdate(DioPinState_t PinValue, SWState_t* State)
 {
-	switch(*state) {
+	if(!(State != 0x0 && 
+		*State < MAX_SW_STATE &&
+	 	PinValue < MAX_DIO_PIN_STATE)) 
+		{
+			//TODO:choose your error handling method
+			return;
+		}
+
+	switch(*State) {
 	case SW_RELEASED:
 		if(PinValue == SW_PRESSED_LEVEL) 
 			{
-				*state = SW_PREPRESSED;
+				*State = SW_PREPRESSED;
 			}
 		else
 			{
-				*state = SW_RELEASED;
+				*State = SW_RELEASED;
 			}
 	break;
 	case SW_PREPRESSED:
 		if(PinValue == SW_PRESSED_LEVEL)
 			{
-				*state = SW_PRESSED;
+				*State = SW_PRESSED;
 			}
 		else 
 			{
-				*state = SW_RELEASED;
+				*State = SW_RELEASED;
 			}
 	break;
 	case SW_PRESSED:
 		if(PinValue == SW_RELEASED_LEVEL)
 			{
-				*state = SW_PRERELEASED;
+				*State = SW_PRERELEASED;
 			}
 		else 
 			{
-				*state = SW_PRESSED;
+				*State = SW_PRESSED;
 			}
 	break;
 	case SW_PRERELEASED:
 		if(PinValue == SW_PRESSED_LEVEL) 
 			{
-				*state = SW_PRESSED;
+				*State = SW_PRESSED;
 			}
 		else
 			{
-				*state = SW_RELEASED;
+				*State = SW_RELEASED;
 			}
 	break;
 	}

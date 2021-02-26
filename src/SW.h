@@ -25,7 +25,8 @@
 * Function Prototypes
 **********************************************************************/
 void SW_Init(const SWConfig_t * const Config);
-SW_STATE_t SW_GetState(uint8_t Index);
+SWState_t SW_GetState(uint8_t Index);
+void SW_SetState(uint8_t Index, SWState_t State);
 void SW_Update(void);
 
 #endif /* end SW_H_ */

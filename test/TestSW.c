@@ -43,7 +43,6 @@ void tearDown(void)
 void 
 test_SwitchesAreReleasedAfterInit(void) 
 {
-	SW_Init(gConfig);
 	for(int i = 0; i < SW_NUM_SWITCHES; i++) 
 		{
 			TEST_ASSERT_EQUAL(SW_GetState(i), SW_RELEASED);

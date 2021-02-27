@@ -11,15 +11,25 @@
 * Includes
 **********************************************************************/
 #include <inttypes.h>
-#include "SW_cfg.h" /**< to extend this module configuration */
 /**********************************************************************
 * Typedefs
 **********************************************************************/
+/**
+ * @brief the state of a switch: ON/OFF
+ */ 
 typedef enum {
 	ON_OFF_SW_ON, /**< The switch is in ON state */
 	ON_OFF_SW_OFF, /**< The switch is in OFF state */
-	MAX_ON_OFF_SW_STATE
+	MAX_ON_OFF_SW_STATE /**< Number of states */
 } OnOffSWState_t;
+
+/**
+ * @brief A structure for the ON/OFF switch module configuration
+ */
+typedef struct {
+	uint8_t Index; /**< the switch index */
+	OnOffSWState_t State;
+} OnOffSWConfig_t;
 /**********************************************************************
 * Module Configuration parameters
 **********************************************************************/
@@ -27,7 +37,7 @@ typedef enum {
 /**********************************************************************
 * functions prototypes
 **********************************************************************/
-SWConfig_t *const OnOffSW_GetConfig(void);
+OnOffSWConfig_t *const OnOffSW_GetConfig(void);
 
 #endif
 /************************* END OF FILE ********************************/

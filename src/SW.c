@@ -75,7 +75,7 @@ SW_SetState(uint8_t Index, SWState_t State)
 }
 
 /*********************************************************************
-* Function : SW_NormalUpdate()
+* Function : SW_FSM()
 *//**
 * \b Description: Utility function to be called from SW_Update to update
 * the state of a switch<br/><br/>
@@ -86,7 +86,7 @@ SW_SetState(uint8_t Index, SWState_t State)
 *
 * @see SW_Init
 **********************************************************************/
-static void SW_NormalUpdate(DioPinState_t PinValue, SWState_t* State)
+static void SW_FSM(DioPinState_t PinValue, SWState_t* State)
 {
 	if(!(State != 0x0 && 
 		*State < MAX_SW_STATE &&
@@ -153,7 +153,7 @@ void SW_Update(void) {
 	for(uint8_t i = 0; i < SW_NUM_SWITCHES; i++) 
 		{
 			DioPinState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
-			SW_NormalUpdate(PinState, &(gConfig[i].State));
+			SW_FSM(PinState, &(gConfig[i].State));
 		}
 }
 

@@ -10,12 +10,13 @@
 /**********************************************************************
 * Includes
 **********************************************************************/
-#include "SW.h" /**< to extend this module interface */
 #include "on_off_SW_cfg.h"
 /**********************************************************************
 * Function Prototypes
 **********************************************************************/
+void OnOffSW_Init(const OnOffSWConfig_t * const Config);
 void OnOffSW_Update(void);
+OnOffSWState_t OnOffSW_GetState(uint8_t Index);
 
 #endif /* end ON_OFF_SW_H */
 /************************* END OF FILE ********************************/

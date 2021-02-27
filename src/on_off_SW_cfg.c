@@ -10,8 +10,8 @@
 /**********************************************************************
 * Module Variable Definitions
 **********************************************************************/
-static SWConfig_t SWConfig[ON_OFF_SW_NUM_SWITCHES] = {
-        {.Channel = PORTB_1}
+static OnOffSWConfig_t SWConfig[ON_OFF_SW_NUM_SWITCHES] = {
+	{.Index = 1}
 };
 /**********************************************************************
 * Function Definitions
@@ -19,7 +19,7 @@ static SWConfig_t SWConfig[ON_OFF_SW_NUM_SWITCHES] = {
 /**
  * @brief return the configuration structure holding the configuration table of the module
  */
-SWConfig_t *const 
+OnOffSWConfig_t *const 
 OnOffSW_GetConfig(void) 
 {
 	return SWConfig;	

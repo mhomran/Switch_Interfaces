@@ -13,7 +13,6 @@
 /// @endcond
 #include "SW.h"
 #include "Dio.h"
-#include "SW_cfg.h"
 
 /**********************************************************************
 * Module Variable Definitions
@@ -40,7 +39,7 @@ SW_Init(const SWConfig_t * const Config)
 
 	gConfig = (SWConfig_t *)Config;
 
-	for(int i = 0; i < NUM_SWITCHES; i++) 
+	for(int i = 0; i < SW_NUM_SWITCHES; i++) 
 		{
 			gConfig[i].State = SW_RELEASED;
 		}
@@ -67,7 +66,7 @@ SW_GetState(uint8_t Index)
 void 
 SW_SetState(uint8_t Index, SWState_t State) 
 {
-	if(!(State < MAX_SW_STATE && Index < NUM_SWITCHES)) 
+	if(!(State < MAX_SW_STATE && Index < SW_NUM_SWITCHES)) 
 		{
 			//TODO:choose your error handling method
 			return;
@@ -151,7 +150,7 @@ static void SW_NormalUpdate(DioPinState_t PinValue, SWState_t* State)
 * @see SW_Init
 **********************************************************************/
 void SW_Update(void) {
-	for(uint8_t i = 0; i < NUM_SWITCHES; i++) 
+	for(uint8_t i = 0; i < SW_NUM_SWITCHES; i++) 
 		{
 			DioPinState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
 			SW_NormalUpdate(PinState, &(gConfig[i].State));

@@ -8,6 +8,11 @@
 #ifndef SW_CFG_H
 #define SW_CFG_H
 /**********************************************************************
+* Preprocessor Constants
+**********************************************************************/
+#define SW_PRESSED_LEVEL LOW
+#define SW_RELEASED_LEVEL HIGH
+/**********************************************************************
 * Includes
 **********************************************************************/
 #include <inttypes.h>
@@ -25,7 +30,6 @@ typedef enum {
     SW_RELEASED, /**< The switch is released */
     MAX_SW_STATE /**< Number of states */
 } SWState_t;
-
 /**
  * @brief Switch structure
  */
@@ -36,7 +40,7 @@ typedef struct {
 /**********************************************************************
 * Module Configuration parameters
 **********************************************************************/
-#define NUM_SWITCHES 3
+#define SW_NUM_SWITCHES 1
 /**********************************************************************
 * functions prototypes
 **********************************************************************/

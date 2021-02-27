@@ -44,7 +44,7 @@ void
 test_SwitchesAreReleasedAfterInit(void) 
 {
 	SW_Init(gConfig);
-	for(int i = 0; i < NUM_SWITCHES; i++) 
+	for(int i = 0; i < SW_NUM_SWITCHES; i++) 
 		{
 			TEST_ASSERT_EQUAL(SW_GetState(i), SW_RELEASED);
 		}
@@ -54,7 +54,7 @@ void
 test_0_switch_FromReleasedToPrepressed(void)
 {
 	//given
-	for(int i = 0; i < NUM_SWITCHES; i++)
+	for(int i = 0; i < SW_NUM_SWITCHES; i++)
 		{
 			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, SW_PRESSED_LEVEL);
 		}
@@ -68,7 +68,7 @@ void
 test_0_switch_FromPrepressedToPressed(void)
 {
 	//given
-	for(int i = 0; i < NUM_SWITCHES; i++)
+	for(int i = 0; i < SW_NUM_SWITCHES; i++)
 		{
 			SW_SetState(i, SW_PREPRESSED);
 			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, SW_PRESSED_LEVEL);
@@ -83,7 +83,7 @@ void
 test_0_switch_FromPressedToPrereleased(void)
 {
 	//given
-	for(int i = 0; i < NUM_SWITCHES; i++)
+	for(int i = 0; i < SW_NUM_SWITCHES; i++)
 		{
 			SW_SetState(i, SW_PRESSED);
 			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, SW_RELEASED_LEVEL);
@@ -98,7 +98,7 @@ void
 test_0_switch_FromPrereleasedToReleased(void)
 {
 	//given
-	for(int i = 0; i < NUM_SWITCHES; i++)
+	for(int i = 0; i < SW_NUM_SWITCHES; i++)
 		{
 			SW_SetState(i, SW_PRERELEASED);
 			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, SW_RELEASED_LEVEL);
@@ -113,7 +113,7 @@ void
 test_0_switch_FromPressedToPressed(void)
 {
 	//given
-	for(int i = 0; i < NUM_SWITCHES; i++)
+	for(int i = 0; i < SW_NUM_SWITCHES; i++)
 		{
 			SW_SetState(i, SW_PRESSED);
 			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, SW_PRESSED_LEVEL);
@@ -128,7 +128,7 @@ void
 test_0_switch_FromReleasedToReleased(void)
 {
 	//given
-	for(int i = 0; i < NUM_SWITCHES; i++)
+	for(int i = 0; i < SW_NUM_SWITCHES; i++)
 		{
 			SW_SetState(i, SW_RELEASED);
 			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, SW_RELEASED_LEVEL);

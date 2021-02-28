@@ -19,7 +19,9 @@
  */ 
 typedef enum {
 	ON_OFF_SW_ON, /**< The switch is in ON state */
+	ON_OFF_SW_INTER_ON, /**< The switch is about to be ON state */
 	ON_OFF_SW_OFF, /**< The switch is in OFF state */
+	ON_OFF_SW_INTER_OFF, /**< The switch is about to be OFF state */
 	MAX_ON_OFF_SW_STATE /**< Number of states */
 } OnOffSWState_t;
 

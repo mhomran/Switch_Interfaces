@@ -17,6 +17,7 @@
 void OnOffSW_Init(const OnOffSWConfig_t * const Config);
 void OnOffSW_Update(void);
 OnOffSWState_t OnOffSW_GetState(uint8_t Index);
+void OnOffSW_SetState(uint8_t Index, OnOffSWState_t State);
 
 #endif /* end ON_OFF_SW_H */
 /************************* END OF FILE ********************************/

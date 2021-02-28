@@ -48,3 +48,82 @@ testSwitchesAreInOffStateAfterInit(void)
 			TEST_ASSERT_EQUAL(OnOffSW_GetState(i), ON_OFF_SW_OFF);
 		}
 }
+
+void
+test_0_switch_OFF_To_INTER_ON_WhenSwIsPressed(void)
+{
+	//given
+	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+		{
+			SW_GetState_ExpectAndReturn(i, SW_PRESSED);
+		}
+
+	//act
+	OnOffSW_Update();
+
+	//assert
+	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+		{
+			TEST_ASSERT_EQUAL(OnOffSW_GetState(i), ON_OFF_SW_INTER_ON);
+		}
+}
+
+void
+test_0_switch_INTER_ON_To_ON_WhenSwIsReleased(void)
+{
+	//given
+	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+		{
+			OnOffSW_SetState(i, ON_OFF_SW_INTER_ON);
+			SW_GetState_ExpectAndReturn(i, SW_RELEASED);
+		}
+
+	//act
+	OnOffSW_Update();
+
+	//assert
+	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+		{
+			TEST_ASSERT_EQUAL(OnOffSW_GetState(i), ON_OFF_SW_ON);
+		}
+}
+
+void
+test_0_switch_ON_To_INTER_OFF_WhenSwIsPressed(void)
+{
+	//given
+	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+		{
+			OnOffSW_SetState(i, ON_OFF_SW_ON);
+			SW_GetState_ExpectAndReturn(i, SW_PRESSED);
+		}
+
+	//act
+	OnOffSW_Update();
+
+	//assert
+	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+		{
+			TEST_ASSERT_EQUAL(OnOffSW_GetState(i), ON_OFF_SW_INTER_OFF);
+		}
+}
+
+void
+test_0_switch_INTER_OFF_To_OFF_WhenSwIsReleased(void)
+{
+	//given
+	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+		{
+			OnOffSW_SetState(i, ON_OFF_SW_INTER_OFF);
+			SW_GetState_ExpectAndReturn(i, SW_RELEASED);
+		}
+
+	//act
+	OnOffSW_Update();
+
+	//assert
+	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+		{
+			TEST_ASSERT_EQUAL(OnOffSW_GetState(i), ON_OFF_SW_OFF);
+		}
+}

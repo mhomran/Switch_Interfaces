@@ -82,9 +82,6 @@ SW_SetState(uint8_t Index, SWState_t State)
 * \b PRE-CONDITION: SW_Init is called<br/>
 * @param PinNumber the pin number in the port
 * @param state a pointer to the state of the switch
-* @return uint8_t the pin voltage level.
-*
-* @see SW_Init
 **********************************************************************/
 static void SW_FSM(DioPinState_t PinValue, SWState_t* State)
 {

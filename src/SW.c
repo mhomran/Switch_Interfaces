@@ -19,6 +19,10 @@
 **********************************************************************/
 static SWConfig_t * gConfig;
 /**********************************************************************
+* Function Prototypes
+**********************************************************************/
+static void SW_FSM(DioPinState_t PinValue, SWState_t* State);
+/**********************************************************************
 * Function Definitions
 **********************************************************************/
 /*********************************************************************
@@ -83,7 +87,8 @@ SW_SetState(uint8_t Index, SWState_t State)
 * @param PinNumber the pin number in the port
 * @param state a pointer to the state of the switch
 **********************************************************************/
-static void SW_FSM(DioPinState_t PinValue, SWState_t* State)
+static void 
+SW_FSM(DioPinState_t PinValue, SWState_t* State)
 {
 	if(!(State != 0x0 && 
 		*State < MAX_SW_STATE &&
@@ -146,7 +151,8 @@ static void SW_FSM(DioPinState_t PinValue, SWState_t* State)
 *
 * @see SW_Init
 **********************************************************************/
-void SW_Update(void) {
+void 
+SW_Update(void) {
 	for(uint8_t i = 0; i < SW_NUM_SWITCHES; i++) 
 		{
 			DioPinState_t PinState = Dio_ChannelRead(gConfig[i].Channel);

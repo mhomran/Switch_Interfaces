@@ -46,3 +46,98 @@ test_SwitchesAreReleasedAfterInit(void)
 			TEST_ASSERT_EQUAL(MSSW_GetState(i), MSSW_RELEASED);
 		}
 }
+
+
+void 
+test_0_switch_FromReleasedToPrepressed(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_PRESSED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_PREPRESSED);
+}
+
+
+void 
+test_0_switch_FromPrepressedToPressed(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_PREPRESSED);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_PRESSED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_PRESSED);
+}
+
+void 
+test_0_switch_FromPressedToPrereleased(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_PRESSED);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_RELEASED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_PRERELEASED);
+}
+
+
+void 
+test_0_switch_FromPrereleasedToReleased(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_PRERELEASED);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_RELEASED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_RELEASED);
+}
+
+
+void 
+test_0_switch_FromPressedAndCounter0ToPressed(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_PRESSED);
+			MSSW_SetCounter(i, 0);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_PRESSED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_PRESSED);
+}
+
+
+void 
+test_0_switch_FromReleasedToReleased(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_RELEASED);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_RELEASED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_RELEASED);
+}

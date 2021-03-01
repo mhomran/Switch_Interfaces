@@ -8,6 +8,11 @@
 #ifndef MULTISTATE_SW_CFG_H
 #define MULTISTATE_SW_CFG_H
 /**********************************************************************
+* Preprocessor Constants
+**********************************************************************/
+#define MSSW_PRESSED_LEVEL LOW
+#define MSSW_RELEASED_LEVEL HIGH
+/**********************************************************************
 * Includes
 **********************************************************************/
 #include <inttypes.h>
@@ -33,11 +38,14 @@ typedef enum {
 typedef struct {
     MSSWState_t State; /**< The switch state */
     DioChannel_t Channel; /**< the physical channel that the switch is connected to */
+    uint16_t Counter; /**< counter for the number of ticks the switch is pressed */ 
 } MSSWConfig_t;
 /**********************************************************************
 * Module Configuration parameters
 **********************************************************************/
-#define MSSW_NUM_SWITCHES 1
+#define MSSW_NUM_SWITCHES 1 /**< the number of multistate switches in your project */
+
+#define MSSW_LONG_PRESSED_TICKS 100 /**< the number of ticks required to go in long-pressed state */
 /**********************************************************************
 * functions prototypes
 **********************************************************************/

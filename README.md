@@ -26,3 +26,4 @@ Theses patterns are taken from the book <b>Patterns for Time-Triggered Embedded 
 # How to run the tests:
  - You should have `ceedling`. If you don't, install `ruby` and run `gem install ceedling`.
  - Head to the repo folder and run `ceedling`
+ - For more verbosity run `ceedling verbosity[4] test:all`

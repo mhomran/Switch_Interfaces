@@ -1,8 +1,8 @@
-# Switch_Interfaces
-Switch interfaces patterns commonly used in embedded systems projects.
+# About
+Switch interfaces patterns that are commonly used in embedded systems projects.
 
 # Acknowledgment
-Theses patterns is taken from the book <b>Patterns for Time-Triggered Embedded Systems</b> <i>by Michael J. Pont</i>
+Theses patterns are taken from the book <b>Patterns for Time-Triggered Embedded Systems</b> <i>by Michael J. Pont</i>
 
 # Patterns
 ## Normal switch:

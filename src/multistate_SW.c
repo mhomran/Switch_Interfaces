@@ -88,7 +88,7 @@ MSSW_SetState(uint8_t Index, MSSWState_t State)
 uint16_t
 MSSW_GetCounter(uint8_t Index) 
 {
-	return gConfig[Index].State;
+	return gConfig[Index].Counter;
 }
 
 /**

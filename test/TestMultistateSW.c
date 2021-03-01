@@ -47,6 +47,14 @@ test_SwitchesAreReleasedAfterInit(void)
 		}
 }
 
+void 
+test_SwitchesCountersAreZeroAfterInit(void) 
+{
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++) 
+		{
+			TEST_ASSERT_EQUAL(MSSW_GetCounter(i), 0);
+		}
+}
 
 void 
 test_0_switch_FromReleasedToPrepressed(void)

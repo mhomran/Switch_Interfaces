@@ -100,7 +100,7 @@ MSSW_GetCounter(uint8_t Index)
 void 
 MSSW_SetCounter(uint8_t Index, uint16_t Counter) 
 {
-	if(!(Counter > MSSW_LONG_PRESSED_TICKS && Index < MSSW_NUM_SWITCHES)) 
+	if(!(Counter <= MSSW_LONGPRESSED_TICKS && Index < MSSW_NUM_SWITCHES)) 
 		{
 			//TODO:choose your error handling method
 			return;
@@ -124,7 +124,7 @@ void MSSW_Update(void) {
 			MSSW_FSM(PinState, &(gConfig[i].State), &(gConfig[i].Counter));
 		}
 }
-
+#include <stdio.h>
 /*********************************************************************
 * Function : SW_FSM()
 *//**
@@ -138,6 +138,7 @@ static void
 MSSW_FSM(DioPinState_t PinValue, MSSWState_t* State, uint16_t* Counter)
 {
 	if(!(State != 0x0 && 
+		Counter != 0x0 && 
 		*State < MAX_MSSW_STATE &&
 	 	PinValue < MAX_DIO_PIN_STATE)) 
 		{
@@ -171,21 +172,43 @@ MSSW_FSM(DioPinState_t PinValue, MSSWState_t* State, uint16_t* Counter)
 			{
 				*State = MSSW_PRERELEASED;
 			}
-		else if(*Counter != MSSW_LONG_PRESSED_TICKS) 
+		else if(*Counter != MSSW_LONGPRESSED_TICKS) 
 			{
 				*State = MSSW_PRESSED;
+				(*Counter)++;
+			}
+		else
+			{
+				*State = MSSW_LONGPRESSED;
 			}
 	break;
 	case MSSW_PRERELEASED:
-		if(PinValue == MSSW_PRESSED_LEVEL) 
+		if(PinValue == MSSW_RELEASED_LEVEL) 
+			{				
+				*State = MSSW_RELEASED;
+				*Counter = 0;
+			}
+		else if(*Counter != MSSW_LONGPRESSED_TICKS)
 			{
 				*State = MSSW_PRESSED;
 			}
 		else
 			{
-				*State = MSSW_RELEASED;
-				*Counter = 0;
+				*State = MSSW_LONGPRESSED;
 			}
+	break;
+	case MSSW_LONGPRESSED:
+		if(PinValue == MSSW_RELEASED_LEVEL)
+			{
+				*State = MSSW_PRERELEASED;
+			}
+		else
+			{
+				*State = MSSW_LONGPRESSED;
+			}
+	break;
+	default:
+	/* DO NOTHING */
 	break;
 	}
 }

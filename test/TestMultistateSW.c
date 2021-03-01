@@ -119,7 +119,7 @@ test_0_switch_FromPrereleasedToReleased(void)
 
 
 void 
-test_0_switch_FromPressedAndCounter0ToPressed(void)
+test_0_switch_FromPressedToPressed(void)
 {
 	//given
 	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
@@ -148,4 +148,98 @@ test_0_switch_FromReleasedToReleased(void)
 	MSSW_Update();
 	//assert
 	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_RELEASED);
+}
+
+void 
+test_0_switch_FromPrereleasedToPressed(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_PRERELEASED);
+			MSSW_SetCounter(i, 0);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_PRESSED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_PRESSED);
+}
+
+void 
+test_0_switch_FromPrepressedToReleased(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_PREPRESSED);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_RELEASED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_RELEASED);
+}
+
+void 
+test_0_switch_FromPressedToLongpressed(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_PRESSED);
+			MSSW_SetCounter(i, MSSW_LONGPRESSED_TICKS);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_PRESSED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_LONGPRESSED);
+}
+
+void 
+test_0_switch_FromLongpressedToLongpressed(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_LONGPRESSED);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_PRESSED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_LONGPRESSED);
+}
+
+
+void 
+test_0_switch_FromLongpressedToPrereleased(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_LONGPRESSED);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_RELEASED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_PRERELEASED);
+}
+
+void 
+test_0_switch_FromPrereleasedToLongpressed(void)
+{
+	//given
+	for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+		{
+			MSSW_SetState(i, MSSW_PRERELEASED);
+			MSSW_SetCounter(i, MSSW_LONGPRESSED_TICKS);
+			Dio_ChannelRead_ExpectAndReturn(gConfig[i].Channel, MSSW_PRESSED_LEVEL);
+		}
+	//act
+	MSSW_Update();
+	//assert
+	TEST_ASSERT_EQUAL(MSSW_GetState(0), MSSW_LONGPRESSED);
 }

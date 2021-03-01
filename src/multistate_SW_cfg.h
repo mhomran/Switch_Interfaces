@@ -45,7 +45,7 @@ typedef struct {
 **********************************************************************/
 #define MSSW_NUM_SWITCHES 1 /**< the number of multistate switches in your project */
 
-#define MSSW_LONG_PRESSED_TICKS 100 /**< the number of ticks required to go in long-pressed state */
+#define MSSW_LONGPRESSED_TICKS 100 /**< the number of ticks required to go in long-pressed state */
 /**********************************************************************
 * functions prototypes
 **********************************************************************/

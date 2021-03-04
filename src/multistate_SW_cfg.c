@@ -10,7 +10,7 @@
 /**********************************************************************
 * Module Variable Definitions
 **********************************************************************/
-static MSSWConfig_t SWConfig[MSSW_NUM_SWITCHES] = {
+static MSSWConfig_t SWConfig[MAX_MSSW_NUM] = {
   {.Channel = PORTB_0}
 };
 /**********************************************************************

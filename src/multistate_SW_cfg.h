@@ -24,21 +24,21 @@
  * @brief The state of the switches.
  */
 typedef enum {
-    MSSW_PREPRESSED, /**< The switch is about to be pressed*/
-    MSSW_PRESSED, /**< The switch is pressed */
-    MSSW_PRERELEASED, /**< The switch is about to be released*/
-    MSSW_RELEASED, /**< The switch is released */
-    MSSW_LONGPRESSED, /**< The switch is pressed long*/
-    MAX_MSSW_STATE /**< Number of states */
+  MSSW_PREPRESSED, /**< The switch is about to be pressed*/
+  MSSW_PRESSED, /**< The switch is pressed */
+  MSSW_PRERELEASED, /**< The switch is about to be released*/
+  MSSW_RELEASED, /**< The switch is released */
+  MSSW_LONGPRESSED, /**< The switch is pressed long*/
+  MAX_MSSW_STATE /**< Number of states */
 } MSSWState_t;
 
 /**
  * @brief Switch structure
  */
 typedef struct {
-    MSSWState_t State; /**< The switch state */
-    DioChannel_t Channel; /**< the physical channel that the switch is connected to */
-    uint16_t Counter; /**< counter for the number of ticks the switch is pressed */ 
+  MSSWState_t State; /**< The switch state */
+  DioChannel_t Channel; /**< the physical channel that the switch is connected to */
+  uint16_t Counter; /**< counter for the number of ticks the switch is pressed */
 } MSSWConfig_t;
 /**********************************************************************
 * Module Configuration parameters

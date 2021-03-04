@@ -32,17 +32,17 @@ static void OnOffSW_FSM(SWState_t, uint8_t);
 void 
 OnOffSW_Init(const OnOffSWConfig_t * const Config)
 {
-	if(Config == 0x0) 
-		{
-			//choose your error handling method
-		}
+  if(Config == 0x0)
+    {
+	    //choose your error handling method
+    }
 
-	gConfig = (OnOffSWConfig_t *)Config;
+  gConfig = (OnOffSWConfig_t *)Config;
 
-	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++) 
-		{
-			gConfig[i].State = ON_OFF_SW_OFF;
-		}
+  for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+    {
+	    gConfig[i].State = ON_OFF_SW_OFF;
+    }
 }
 
 /**
@@ -54,7 +54,7 @@ OnOffSW_Init(const OnOffSWConfig_t * const Config)
 OnOffSWState_t
 OnOffSW_GetState(uint8_t Index)
 {
-	return gConfig[Index].State;
+  return gConfig[Index].State;
 }
 
 /**
@@ -66,12 +66,12 @@ OnOffSW_GetState(uint8_t Index)
 void
 OnOffSW_SetState(uint8_t Index, OnOffSWState_t State)
 {
-	if(!(State < MAX_ON_OFF_SW_STATE && Index < SW_NUM_SWITCHES)) 
-		{
-			//TODO:choose your error handling method
-			return;
-		}
-	gConfig[Index].State = State;
+  if(!(State < MAX_ON_OFF_SW_STATE && Index < SW_NUM_SWITCHES))
+    {
+      //TODO:choose your error handling method
+      return;
+    }
+  gConfig[Index].State = State;
 }
 
 /*********************************************************************
@@ -88,36 +88,36 @@ OnOffSW_SetState(uint8_t Index, OnOffSWState_t State)
 static void
 OnOffSW_FSM(SWState_t SwState, uint8_t SwIndex)
 {
-		switch (gConfig[SwIndex].State)
-		{
-		case ON_OFF_SW_OFF:
-		if(SwState == SW_PRESSED)
-			{
-				OnOffSW_SetState(SwIndex, ON_OFF_SW_INTER_ON);
-			}
-		break;
-		case ON_OFF_SW_INTER_ON:
-		if(SwState == SW_RELEASED)
-			{
-				OnOffSW_SetState(SwIndex, ON_OFF_SW_ON);
-			}
-		break;
-		case ON_OFF_SW_ON:
-		if(SwState == SW_PRESSED)
-			{
-				OnOffSW_SetState(SwIndex, ON_OFF_SW_INTER_OFF);
-			}
-		break;
-		case ON_OFF_SW_INTER_OFF:
-		if(SwState == SW_RELEASED)
-			{
-				OnOffSW_SetState(SwIndex, ON_OFF_SW_OFF);
-			}
-		break;
-		default:
-		//do nothing
-		break;
-		}
+  switch (gConfig[SwIndex].State)
+  {
+  case ON_OFF_SW_OFF:
+    if(SwState == SW_PRESSED)
+      {
+	OnOffSW_SetState(SwIndex, ON_OFF_SW_INTER_ON);
+      }
+  break;
+  case ON_OFF_SW_INTER_ON:
+    if(SwState == SW_RELEASED)
+      {
+	OnOffSW_SetState(SwIndex, ON_OFF_SW_ON);
+      }
+  break;
+  case ON_OFF_SW_ON:
+    if(SwState == SW_PRESSED)
+      {
+	OnOffSW_SetState(SwIndex, ON_OFF_SW_INTER_OFF);
+      }
+  break;
+  case ON_OFF_SW_INTER_OFF:
+    if(SwState == SW_RELEASED)
+      {
+	OnOffSW_SetState(SwIndex, ON_OFF_SW_OFF);
+      }
+  break;
+  default:
+  //do nothing
+  break;
+  }
 }
 
 /*********************************************************************
@@ -132,10 +132,10 @@ OnOffSW_FSM(SWState_t SwState, uint8_t SwIndex)
 void 
 OnOffSW_Update(void)
 {
-	for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++) 
-		{
-			SWState_t SwState = SW_GetState(i);
-			OnOffSW_FSM(SwState, i);
-		}
+  for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+    {
+      SWState_t SwState = SW_GetState(i);
+      OnOffSW_FSM(SwState, i);
+    }
 }
 /************************* END OF FILE ********************************/

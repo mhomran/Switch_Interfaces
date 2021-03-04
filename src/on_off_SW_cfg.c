@@ -11,7 +11,7 @@
 * Module Variable Definitions
 **********************************************************************/
 static OnOffSWConfig_t SWConfig[ON_OFF_SW_NUM_SWITCHES] = {
-	{.Index = 1}
+  {.Index = 1}
 };
 /**********************************************************************
 * Function Definitions
@@ -22,6 +22,6 @@ static OnOffSWConfig_t SWConfig[ON_OFF_SW_NUM_SWITCHES] = {
 OnOffSWConfig_t *const 
 OnOffSW_GetConfig(void) 
 {
-	return SWConfig;	
+  return SWConfig;
 }
 /************************* END OF FILE ********************************/

@@ -14,7 +14,7 @@
 * Module Variable Definitions
 **********************************************************************/
 static SWConfig_t SWConfig[SW_NUM_SWITCHES] = {
-        {.Channel = PORTB_0}
+  {.Channel = PORTB_0}
 };
 /**********************************************************************
 * Function Definitions
@@ -25,7 +25,7 @@ static SWConfig_t SWConfig[SW_NUM_SWITCHES] = {
 SWConfig_t *const 
 SW_GetConfig(void) 
 {
-	return SWConfig;	
+  return SWConfig;
 }
 
 /************************* END OF FILE ********************************/

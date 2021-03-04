@@ -36,17 +36,17 @@ static void SW_FSM(DioPinState_t PinValue, SWState_t* State);
 void 
 SW_Init(const SWConfig_t * const Config)
 {
-	if(Config == 0x0) 
-		{
-			//choose your error handling method
-		}
+  if(Config == 0x0)
+    {
+      //choose your error handling method
+    }
 
-	gConfig = (SWConfig_t *)Config;
+  gConfig = (SWConfig_t *)Config;
 
-	for(int i = 0; i < SW_NUM_SWITCHES; i++) 
-		{
-			gConfig[i].State = SW_RELEASED;
-		}
+  for(int i = 0; i < SW_NUM_SWITCHES; i++)
+    {
+      gConfig[i].State = SW_RELEASED;
+    }
 }
 
 /**
@@ -58,7 +58,7 @@ SW_Init(const SWConfig_t * const Config)
 SWState_t
 SW_GetState(uint8_t Index) 
 {
-	return gConfig[Index].State;
+  return gConfig[Index].State;
 }
 
 /**
@@ -70,12 +70,12 @@ SW_GetState(uint8_t Index)
 void 
 SW_SetState(uint8_t Index, SWState_t State) 
 {
-	if(!(State < MAX_SW_STATE && Index < SW_NUM_SWITCHES)) 
-		{
-			//TODO:choose your error handling method
-			return;
-		}
-	gConfig[Index].State = State;
+  if(!(State < MAX_SW_STATE && Index < SW_NUM_SWITCHES))
+    {
+      //TODO:choose your error handling method
+      return;
+    }
+  gConfig[Index].State = State;
 }
 
 /*********************************************************************
@@ -90,56 +90,58 @@ SW_SetState(uint8_t Index, SWState_t State)
 static void 
 SW_FSM(DioPinState_t PinValue, SWState_t* State)
 {
-	if(!(State != 0x0 && 
-		*State < MAX_SW_STATE &&
-	 	PinValue < MAX_DIO_PIN_STATE)) 
-		{
-			//TODO:choose your error handling method
-			return;
-		}
+  if(!(State != 0x0 &&
+  *State < MAX_SW_STATE &&
+  PinValue < MAX_DIO_PIN_STATE))
+    {
+      //TODO:choose your error handling method
+      return;
+    }
 
-	switch(*State) {
-	case SW_RELEASED:
-		if(PinValue == SW_PRESSED_LEVEL) 
-			{
-				*State = SW_PREPRESSED;
-			}
-		else
-			{
-				*State = SW_RELEASED;
-			}
-	break;
-	case SW_PREPRESSED:
-		if(PinValue == SW_PRESSED_LEVEL)
-			{
-				*State = SW_PRESSED;
-			}
-		else 
-			{
-				*State = SW_RELEASED;
-			}
-	break;
-	case SW_PRESSED:
-		if(PinValue == SW_RELEASED_LEVEL)
-			{
-				*State = SW_PRERELEASED;
-			}
-		else 
-			{
-				*State = SW_PRESSED;
-			}
-	break;
-	case SW_PRERELEASED:
-		if(PinValue == SW_PRESSED_LEVEL) 
-			{
-				*State = SW_PRESSED;
-			}
-		else
-			{
-				*State = SW_RELEASED;
-			}
-	break;
-	}
+  switch(*State) {
+  case SW_RELEASED:
+    if(PinValue == SW_PRESSED_LEVEL)
+      {
+	*State = SW_PREPRESSED;
+      }
+    else
+      {
+	*State = SW_RELEASED;
+      }
+  break;
+  case SW_PREPRESSED:
+    if(PinValue == SW_PRESSED_LEVEL)
+      {
+	*State = SW_PRESSED;
+      }
+    else
+      {
+	*State = SW_RELEASED;
+      }
+  break;
+  case SW_PRESSED:
+    if(PinValue == SW_RELEASED_LEVEL)
+      {
+	*State = SW_PRERELEASED;
+      }
+    else
+      {
+	*State = SW_PRESSED;
+      }
+  break;
+  case SW_PRERELEASED:
+    if(PinValue == SW_PRESSED_LEVEL)
+      {
+	*State = SW_PRESSED;
+      }
+    else
+      {
+	*State = SW_RELEASED;
+      }
+  break;
+  default:
+    break;
+  }
 }
 
 /*********************************************************************
@@ -153,11 +155,11 @@ SW_FSM(DioPinState_t PinValue, SWState_t* State)
 **********************************************************************/
 void 
 SW_Update(void) {
-	for(uint8_t i = 0; i < SW_NUM_SWITCHES; i++) 
-		{
-			DioPinState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
-			SW_FSM(PinState, &(gConfig[i].State));
-		}
+  for(uint8_t i = 0; i < SW_NUM_SWITCHES; i++)
+    {
+      DioPinState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
+      SW_FSM(PinState, &(gConfig[i].State));
+    }
 }
 
 /************************* END OF FILE ********************************/

@@ -11,7 +11,7 @@
 * Module Variable Definitions
 **********************************************************************/
 static OnOffSWConfig_t SWConfig[ON_OFF_SW_NUM_SWITCHES] = {
-  {.Index = 1}
+  {.Index = 0}
 };
 /**********************************************************************
 * Function Definitions

@@ -134,7 +134,7 @@ OnOffSW_Update(void)
 {
   for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
     {
-      SWState_t SwState = SW_GetState(i);
+      SWState_t SwState = SW_GetState(gConfig[i].Index);
       OnOffSW_FSM(SwState, i);
     }
 }

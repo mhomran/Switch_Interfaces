@@ -39,7 +39,7 @@ OnOffSW_Init(const OnOffSWConfig_t * const Config)
 
   gConfig = (OnOffSWConfig_t *)Config;
 
-  for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+  for(int i = 0; i < MAX_ON_OFF_SW_NUM; i++)
     {
 	    gConfig[i].State = ON_OFF_SW_OFF;
     }
@@ -52,8 +52,13 @@ OnOffSW_Init(const OnOffSWConfig_t * const Config)
  * @return OnOffSWState_t the state of the switch
  */
 OnOffSWState_t
-OnOffSW_GetState(uint8_t Index)
+OnOffSW_GetState(OnOffSW_t Index)
 {
+  if(!(Index < MAX_ON_OFF_SW_NUM))
+    {
+      //TODO:choose your error handling method
+      return ON_OFF_SW_ON;
+    }
   return gConfig[Index].State;
 }
 
@@ -64,9 +69,9 @@ OnOffSW_GetState(uint8_t Index)
  * @param State the state of the switch
  */
 void
-OnOffSW_SetState(uint8_t Index, OnOffSWState_t State)
+OnOffSW_SetState(OnOffSW_t Index, OnOffSWState_t State)
 {
-  if(!(State < MAX_ON_OFF_SW_STATE && Index < SW_NUM_SWITCHES))
+  if(!(State < MAX_ON_OFF_SW_STATE && Index < MAX_ON_OFF_SW_NUM))
     {
       //TODO:choose your error handling method
       return;
@@ -132,7 +137,7 @@ OnOffSW_FSM(SWState_t SwState, uint8_t SwIndex)
 void 
 OnOffSW_Update(void)
 {
-  for(int i = 0; i < ON_OFF_SW_NUM_SWITCHES; i++)
+  for(int i = 0; i < MAX_ON_OFF_SW_NUM; i++)
     {
       SWState_t SwState = SW_GetState(gConfig[i].Index);
       OnOffSW_FSM(SwState, i);

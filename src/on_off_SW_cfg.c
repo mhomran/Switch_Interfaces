@@ -7,11 +7,12 @@
  */
 
 #include "on_off_SW_cfg.h"
+#include "SW_cfg.h"
 /**********************************************************************
 * Module Variable Definitions
 **********************************************************************/
-static OnOffSWConfig_t SWConfig[ON_OFF_SW_NUM_SWITCHES] = {
-  {.Index = 0}
+static OnOffSWConfig_t SWConfig[MAX_ON_OFF_SW_NUM] = {
+  {.Index = SW_OPEN_VALVE}
 };
 /**********************************************************************
 * Function Definitions

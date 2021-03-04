@@ -43,7 +43,7 @@ SW_Init(const SWConfig_t * const Config)
 
   gConfig = (SWConfig_t *)Config;
 
-  for(int i = 0; i < SW_NUM_SWITCHES; i++)
+  for(int i = 0; i < MAX_SW_NUM; i++)
     {
       gConfig[i].State = SW_RELEASED;
     }
@@ -56,8 +56,13 @@ SW_Init(const SWConfig_t * const Config)
  * @return SWState_t The state of the switch
  */
 SWState_t
-SW_GetState(uint8_t Index) 
+SW_GetState(SW_t Index) 
 {
+  if(!(Index < MAX_SW_NUM))
+    {
+      //TODO:choose your error handling method
+      return SW_PRESSED;
+    }
   return gConfig[Index].State;
 }
 
@@ -68,9 +73,9 @@ SW_GetState(uint8_t Index)
  * @param State The state of the switch
  */
 void 
-SW_SetState(uint8_t Index, SWState_t State) 
+SW_SetState(SW_t Index, SWState_t State) 
 {
-  if(!(State < MAX_SW_STATE && Index < SW_NUM_SWITCHES))
+  if(!(State < MAX_SW_STATE && Index < MAX_SW_NUM))
     {
       //TODO:choose your error handling method
       return;
@@ -155,7 +160,7 @@ SW_FSM(DioPinState_t PinValue, SWState_t* State)
 **********************************************************************/
 void 
 SW_Update(void) {
-  for(uint8_t i = 0; i < SW_NUM_SWITCHES; i++)
+  for(uint8_t i = 0; i < MAX_SW_NUM; i++)
     {
       DioPinState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
       SW_FSM(PinState, &(gConfig[i].State));

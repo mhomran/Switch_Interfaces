@@ -43,7 +43,7 @@ MSSW_Init(const MSSWConfig_t * const Config)
 
   gConfig = (MSSWConfig_t *)Config;
 
-  for(int i = 0; i < MSSW_NUM_SWITCHES; i++)
+  for(int i = 0; i < MAX_MSSW_NUM; i++)
     {
       gConfig[i].State = MSSW_RELEASED;
       gConfig[i].Counter = 0;
@@ -57,8 +57,13 @@ MSSW_Init(const MSSWConfig_t * const Config)
  * @return MSSWState_t The state of the switch
  */
 MSSWState_t
-MSSW_GetState(uint8_t Index) 
+MSSW_GetState(MSSW_t Index) 
 {
+  if(!(Index < MAX_MSSW_NUM))
+    {
+      //TODO:choose your error handling method
+      return MSSW_PRESSED;
+    }
   return gConfig[Index].State;
 }
 
@@ -69,9 +74,9 @@ MSSW_GetState(uint8_t Index)
  * @param State The state of the switch
  */
 void 
-MSSW_SetState(uint8_t Index, MSSWState_t State) 
+MSSW_SetState(MSSW_t Index, MSSWState_t State) 
 {
-  if(!(State < MAX_MSSW_STATE && Index < MSSW_NUM_SWITCHES))
+  if(!(State < MAX_MSSW_STATE && Index < MAX_MSSW_NUM))
     {
       //TODO:choose your error handling method
       return;
@@ -86,8 +91,13 @@ MSSW_SetState(uint8_t Index, MSSWState_t State)
  * @return uint16_t the switch pressed time in ticks
  */
 uint16_t
-MSSW_GetCounter(uint8_t Index) 
+MSSW_GetCounter(MSSW_t Index) 
 {
+  if(!(Index < MAX_MSSW_NUM))
+    {
+      //TODO:choose your error handling method
+      return 0;
+    }
   return gConfig[Index].Counter;
 }
 
@@ -98,9 +108,9 @@ MSSW_GetCounter(uint8_t Index)
  * @param Counter the switch pressed time in ticks
  */
 void 
-MSSW_SetCounter(uint8_t Index, uint16_t Counter) 
+MSSW_SetCounter(MSSW_t Index, uint16_t Counter) 
 {
-  if(!(Counter <= MSSW_LONGPRESSED_TICKS && Index < MSSW_NUM_SWITCHES))
+  if(!(Counter <= MSSW_LONGPRESSED_TICKS && Index < MAX_MSSW_NUM))
     {
       //TODO:choose your error handling method
       return;
@@ -120,7 +130,7 @@ MSSW_SetCounter(uint8_t Index, uint16_t Counter)
 void
 MSSW_Update(void)
 {
-  for(uint8_t i = 0; i < MSSW_NUM_SWITCHES; i++)
+  for(uint8_t i = 0; i < MAX_MSSW_NUM; i++)
     {
       DioPinState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
       MSSW_FSM(PinState, &(gConfig[i].State), &(gConfig[i].Counter));
@@ -152,65 +162,65 @@ MSSW_FSM(DioPinState_t PinValue, MSSWState_t* State, uint16_t* Counter)
   case MSSW_RELEASED:
     if(PinValue == MSSW_PRESSED_LEVEL)
       {
-	*State = MSSW_PREPRESSED;
+        *State = MSSW_PREPRESSED;
       }
     else
       {
-	*State = MSSW_RELEASED;
+	      *State = MSSW_RELEASED;
       }
   break;
   case MSSW_PREPRESSED:
     if(PinValue == MSSW_PRESSED_LEVEL)
       {
-	*State = MSSW_PRESSED;
+	      *State = MSSW_PRESSED;
       }
     else
       {
-	*State = MSSW_RELEASED;
+	      *State = MSSW_RELEASED;
       }
   break;
   case MSSW_PRESSED:
     if(PinValue == MSSW_RELEASED_LEVEL)
       {
-	*State = MSSW_PRERELEASED;
+	      *State = MSSW_PRERELEASED;
       }
     else if(*Counter != MSSW_LONGPRESSED_TICKS)
       {
-	*State = MSSW_PRESSED;
-	(*Counter)++;
+        *State = MSSW_PRESSED;
+        (*Counter)++;
       }
     else
       {
-	*State = MSSW_LONGPRESSED;
+	      *State = MSSW_LONGPRESSED;
       }
   break;
   case MSSW_PRERELEASED:
     if(PinValue == MSSW_RELEASED_LEVEL)
       {
-	*State = MSSW_RELEASED;
-	*Counter = 0;
+        *State = MSSW_RELEASED;
+        *Counter = 0;
       }
     else if(*Counter != MSSW_LONGPRESSED_TICKS)
       {
-	*State = MSSW_PRESSED;
+	      *State = MSSW_PRESSED;
       }
     else
       {
-	*State = MSSW_LONGPRESSED;
+	      *State = MSSW_LONGPRESSED;
       }
   break;
   case MSSW_LONGPRESSED:
     if(PinValue == MSSW_RELEASED_LEVEL)
       {
-	*State = MSSW_PRERELEASED;
+	      *State = MSSW_PRERELEASED;
       }
     else
       {
-	*State = MSSW_LONGPRESSED;
+	      *State = MSSW_LONGPRESSED;
       }
   break;
   default:
-  /* DO NOTHING */
+    /* DO NOTHING */
   break;
   }
 }

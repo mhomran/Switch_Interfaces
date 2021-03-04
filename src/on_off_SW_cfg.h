@@ -15,6 +15,15 @@
 * Typedefs
 **********************************************************************/
 /**
+* Defines an enumerated list of all the on/off switches in the project
+*/
+typedef enum {
+  //TODO: add your switches here
+  SW_EMERGENCY,
+  MAX_ON_OFF_SW_NUM
+} OnOffSW_t;
+
+/**
  * @brief the state of a switch: ON/OFF
  */ 
 typedef enum {
@@ -32,10 +41,6 @@ typedef struct {
 	uint8_t Index; /**< the switch index */
 	OnOffSWState_t State;
 } OnOffSWConfig_t;
-/**********************************************************************
-* Module Configuration parameters
-**********************************************************************/
-#define ON_OFF_SW_NUM_SWITCHES 1
 /**********************************************************************
 * functions prototypes
 **********************************************************************/

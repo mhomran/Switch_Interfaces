@@ -21,6 +21,15 @@
 * Typedefs
 **********************************************************************/
 /**
+* Defines an enumerated list of all normal swithes in the project
+*/
+typedef enum {
+  //TODO: add your switches here
+  SW_OPEN_VALVE,
+  MAX_SW_NUM
+} SW_t;
+
+/**
  * @brief The state of the switches.
  */
 typedef enum {
@@ -37,10 +46,6 @@ typedef struct {
   SWState_t State; /**< The switch state */
   DioChannel_t Channel; /**< the physical channel that the switch is connected to */
 } SWConfig_t;
-/**********************************************************************
-* Module Configuration parameters
-**********************************************************************/
-#define SW_NUM_SWITCHES 1
 /**********************************************************************
 * functions prototypes
 **********************************************************************/

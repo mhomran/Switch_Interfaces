@@ -20,11 +20,11 @@
 void MSSW_Init(const MSSWConfig_t * const Config);
 void MSSW_Update(void);
 
-MSSWState_t MSSW_GetState(uint8_t Index);
-void MSSW_SetState(uint8_t Index, MSSWState_t State);
+MSSWState_t MSSW_GetState(MSSW_t Index);
+void MSSW_SetState(MSSW_t Index, MSSWState_t State);
 
-uint16_t MSSW_GetCounter(uint8_t Index);
-void MSSW_SetCounter(uint8_t Index, uint16_t Counter);
+uint16_t MSSW_GetCounter(MSSW_t Index);
+void MSSW_SetCounter(MSSW_t Index, uint16_t Counter);
 
 #endif /* end MULTISTATE_SW_H_ */
 /************************* END OF FILE ********************************/

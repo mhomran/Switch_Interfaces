@@ -21,6 +21,15 @@
 * Typedefs
 **********************************************************************/
 /**
+* Defines an enumerated list of all multistate swithes in the project
+*/
+typedef enum {
+  //TODO: add your switches here
+  SW_BLUE_RED,
+  MAX_MSSW_NUM
+} MSSW_t;
+
+/**
  * @brief The state of the switches.
  */
 typedef enum {
@@ -43,8 +52,6 @@ typedef struct {
 /**********************************************************************
 * Module Configuration parameters
 **********************************************************************/
-#define MSSW_NUM_SWITCHES 1 /**< the number of multistate switches in your project */
-
 #define MSSW_LONGPRESSED_TICKS 100 /**< the number of ticks required to go in long-pressed state */
 /**********************************************************************
 * functions prototypes

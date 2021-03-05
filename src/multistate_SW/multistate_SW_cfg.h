@@ -16,7 +16,7 @@
 * Includes
 **********************************************************************/
 #include <inttypes.h>
-#include "Dio_cfg.h"
+#include "../dio/dio_cfg.h"
 /**********************************************************************
 * Typedefs
 **********************************************************************/
@@ -24,8 +24,7 @@
 * Defines an enumerated list of all multistate swithes in the project
 */
 typedef enum {
-  //TODO: add your switches here
-  SW_BLUE_RED,
+  MSSW_MY_MSSW,
   MAX_MSSW_NUM
 } MSSW_t;
 
@@ -52,7 +51,8 @@ typedef struct {
 /**********************************************************************
 * Module Configuration parameters
 **********************************************************************/
-#define MSSW_LONGPRESSED_TICKS 100 /**< the number of ticks required to go in long-pressed state */
+/**< the number of Switch ticks required to go in long-pressed state */
+#define MSSW_LONGPRESSED_TICKS 50
 /**********************************************************************
 * functions prototypes
 **********************************************************************/

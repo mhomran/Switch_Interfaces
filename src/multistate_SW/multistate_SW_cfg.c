@@ -6,12 +6,14 @@
  * @date 2021-03-01
  */
 
-#include "multistate_SW_cfg.h"
+#include "../multistate_SW/multistate_SW_cfg.h"
+
+#include "../port.h"
 /**********************************************************************
 * Module Variable Definitions
 **********************************************************************/
 static MSSWConfig_t SWConfig[MAX_MSSW_NUM] = {
-  {.Channel = PORTB_0}
+  {.Channel = MY_MSSW_CHANNEL}
 };
 /**********************************************************************
 * Function Definitions

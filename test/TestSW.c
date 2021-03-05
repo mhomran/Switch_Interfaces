@@ -17,7 +17,7 @@
 
 #include "SW.h"
 #include "SW_cfg.h"
-#include "MockDio.h"
+#include "Mock_dio.h"
 
 
 /**********************************************************************

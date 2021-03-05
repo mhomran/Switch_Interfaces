@@ -10,10 +10,11 @@
 * Includes
 **********************************************************************/
 /// @cond NODOC
+#include "../multistate_SW/multistate_SW.h"
+
 #include <inttypes.h>
 /// @endcond
-#include "multistate_SW.h"
-#include "Dio.h"
+#include "../dio/dio.h"
 /**********************************************************************
 * Module Variable Definitions
 **********************************************************************/

@@ -12,7 +12,7 @@
 #include <inttypes.h>
 /// @endcond
 #include "SW.h"
-#include "Dio.h"
+#include "../dio/dio.h"
 
 /**********************************************************************
 * Module Variable Definitions

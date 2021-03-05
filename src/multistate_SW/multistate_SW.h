@@ -13,7 +13,8 @@
 /// @cond NODOC
 #include <inttypes.h>
 /// @endcond
-#include "multistate_SW_cfg.h"
+
+#include "../multistate_SW/multistate_SW_cfg.h"
 /**********************************************************************
 * Function Prototypes
 **********************************************************************/

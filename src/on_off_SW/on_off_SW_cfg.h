@@ -19,7 +19,7 @@
 */
 typedef enum {
   //TODO: add your switches here
-  SW_EMERGENCY,
+  ON_OFF_SW_OPEN_VALVE,
   MAX_ON_OFF_SW_NUM
 } OnOffSW_t;
 

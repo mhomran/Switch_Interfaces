@@ -17,7 +17,7 @@
 
 #include "on_off_SW.h"
 #include "on_off_SW_cfg.h"
-#include "MockSW.h"
+#include "Mock_SW.h"
 
 /**********************************************************************
 * Variable Definitions
@@ -55,7 +55,7 @@ test_0_switch_OFF_To_INTER_ON_WhenSwIsPressed(void)
 	//given
 	for(int i = 0; i < MAX_ON_OFF_SW_NUM; i++)
 		{
-			SW_GetState_ExpectAndReturn(i, SW_PRESSED);
+			SW_GetState_ExpectAndReturn(gConfig[i].Index, SW_PRESSED);
 		}
 
 	//act
@@ -75,7 +75,7 @@ test_0_switch_INTER_ON_To_ON_WhenSwIsReleased(void)
 	for(int i = 0; i < MAX_ON_OFF_SW_NUM; i++)
 		{
 			OnOffSW_SetState(i, ON_OFF_SW_INTER_ON);
-			SW_GetState_ExpectAndReturn(i, SW_RELEASED);
+			SW_GetState_ExpectAndReturn(gConfig[i].Index, SW_RELEASED);
 		}
 
 	//act
@@ -95,7 +95,7 @@ test_0_switch_ON_To_INTER_OFF_WhenSwIsPressed(void)
 	for(int i = 0; i < MAX_ON_OFF_SW_NUM; i++)
 		{
 			OnOffSW_SetState(i, ON_OFF_SW_ON);
-			SW_GetState_ExpectAndReturn(i, SW_PRESSED);
+			SW_GetState_ExpectAndReturn(gConfig[i].Index, SW_PRESSED);
 		}
 
 	//act
@@ -115,7 +115,7 @@ test_0_switch_INTER_OFF_To_OFF_WhenSwIsReleased(void)
 	for(int i = 0; i < MAX_ON_OFF_SW_NUM; i++)
 		{
 			OnOffSW_SetState(i, ON_OFF_SW_INTER_OFF);
-			SW_GetState_ExpectAndReturn(i, SW_RELEASED);
+			SW_GetState_ExpectAndReturn(gConfig[i].Index, SW_RELEASED);
 		}
 
 	//act

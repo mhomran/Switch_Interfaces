@@ -9,12 +9,14 @@
 * Includes
 **********************************************************************/
 #include "SW_cfg.h"
-#include "Dio_cfg.h"
+#include "../dio/dio_cfg.h"
+#include "../port.h"
 /**********************************************************************
 * Module Variable Definitions
 **********************************************************************/
 static SWConfig_t SWConfig[MAX_SW_NUM] = {
-  {.Channel = PORTB_0}
+  {.Channel = MY_SW_CHANNEL},
+  {.Channel = MY_ON_OFF_SW_CHANNEL}
 };
 /**********************************************************************
 * Function Definitions

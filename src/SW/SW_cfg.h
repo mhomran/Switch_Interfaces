@@ -16,7 +16,7 @@
 * Includes
 **********************************************************************/
 #include <inttypes.h>
-#include "Dio_cfg.h"
+#include "../dio/dio_cfg.h"
 /**********************************************************************
 * Typedefs
 **********************************************************************/
@@ -24,7 +24,7 @@
 * Defines an enumerated list of all normal swithes in the project
 */
 typedef enum {
-  //TODO: add your switches here
+  SW_MY_SW,
   SW_OPEN_VALVE,
   MAX_SW_NUM
 } SW_t;

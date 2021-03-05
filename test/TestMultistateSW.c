@@ -16,9 +16,9 @@
 #include "unity.h"
 /// @endcond
 
-#include "multistate_SW.h"
-#include "multistate_SW_cfg.h"
-#include "MockDio.h"
+#include "../src/multistate_SW/multistate_SW.h"
+#include "../src/multistate_SW/multistate_SW_cfg.h"
+#include "Mock_dio.h"
 
 /**********************************************************************
 * Variable Definitions

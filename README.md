@@ -20,11 +20,19 @@ Theses patterns are taken from the book <b>Patterns for Time-Triggered Embedded 
   <a href="" rel="noopener">
  <img src="https://github.com/mhomran/Switch_Interfaces/raw/master/imgs/OnOffSW.png" alt="ON/OFF Switch Pattern"></a>
 </p>
+<p align="center">
+  <a href="" rel="noopener">
+ <img src="https://github.com/mhomran/Switch_Interfaces/raw/master/imgs/OnOffSW.gif" alt="ON/OFF Switch Pattern"></a>
+</p>
 
 ## Multistate switch:
 <p align="center">
   <a href="" rel="noopener">
  <img src="https://github.com/mhomran/Switch_Interfaces/raw/master/imgs/Multistate_SW.png" alt="Multistate Switch Pattern"></a>
+</p>
+<p align="center">
+  <a href="" rel="noopener">
+ <img src="https://github.com/mhomran/Switch_Interfaces/raw/master/imgs/Multistate_SW.gif" alt="Multistate Switch Pattern"></a>
 </p>
 
 # How to run the tests:

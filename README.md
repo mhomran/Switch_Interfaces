@@ -10,6 +10,10 @@ Theses patterns are taken from the book <b>Patterns for Time-Triggered Embedded 
   <a href="" rel="noopener">
  <img src="https://github.com/mhomran/Switch_Interfaces/raw/master/imgs/Normal_SW.png" alt="Normal Switch Pattern"></a>
 </p>
+<p align="center">
+  <a href="" rel="noopener">
+ <img src="https://github.com/mhomran/Switch_Interfaces/raw/master/imgs/Normal_SW.gif" alt="Normal Switch Pattern"></a>
+</p>
 
 ## ON/OFF switch:
 <p align="center">

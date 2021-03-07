@@ -1,11 +1,14 @@
-/** @file dio.h
-* @brief The interface definition for the dio.
-*
-* This is the header file for the definition of the interface for a digital
-* input/output peripheral on a standard microcontroller.
+/** 
+ * @file dio.h
+ * @author Mohamed Hassanin
+ * @brief The interface definition for the dio.
+ * This is the header file for the definition of the interface for a digital
+ * input/output peripheral on a standard microcontroller.
+ * @version 0.1
+ * @date 2021-01-12
 */
-#ifndef DIO_H_
-#define DIO_H_
+#ifndef DIO_EXT_H_
+#define DIO_EXT_H_
 /**********************************************************************
 * Includes
 **********************************************************************/
@@ -19,15 +22,19 @@ extern "C"{
 #endif
 
 void Dio_Init(const DioConfig_t * const Config);
-DioPinState_t Dio_ChannelRead(DioChannel_t Channel);
-void Dio_ChannelWrite(DioChannel_t Channel, DioPinState_t State);
-void Dio_ChannelToggle(DioChannel_t Channel);
+
+DioState_t Dio_ChannelRead(DioChannel_t Channel);
+void Dio_ChannelWrite(DioChannel_t Channel, DioState_t State);
+
+void Dio_SetChannelDirection(DioChannel_t Channel, DioDirection_t Direction);
+
 void Dio_RegisterWrite(uint8_t volatile * const Address, uint8_t Value);
 const volatile uint8_t Dio_RegisterRead(const volatile uint8_t * const Address);
+
 
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
-#endif /*DIO_H_*/
-/*** End of File ******************************************************/
+#endif /* DIO_H_*/
+/*************** END OF FILE ********************************/

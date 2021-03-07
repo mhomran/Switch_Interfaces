@@ -1,35 +1,25 @@
-/** @file dio_cfg.h
-* @brief This module contains interface definitions for the
-* Dio configuration. This is the header file for the definition of the
-* interface for retrieving the digital input/output configuration table.
+/** 
+ * @file dio_cfg.h
+ * @author Mohamed Hassanin
+ * @brief This module contains interface definitions for the
+ * Dio configuration. This is the header file for the definition of the
+ * interface for retrieving the digital input/output configuration table.
+ * @version 0.1
+ * @date 2021-01-12
 */
-#ifndef DIO_CONFIG_H_
-#define DIO_CONFIG_H_
-
+#ifndef DIO_CFG_H_
+#define DIO_CFG_H_
 /**********************************************************************
 * Preprocessor Constants
 **********************************************************************/
 /**
- * Means that this feature is supported
- */
-#define STD_ON 1
-/**
- * Means that this feature is not supported
- */
-#define STD_OFF 0
-/**
 * Defines the number of pins on each processor port.
 */
-#define NUMBER_OF_CHANNELS_PER_PORT 8U
+#define DIO_CHANNELS_PER_PORT 8U
 /**
 * Defines the number of ports on the processor.
 */
-#define NUMBER_OF_PORTS 4U
-
-/**
- * Does this target support toggling.
- */
-#define DIO_TOGGLE STD_OFF
+#define DIO_NUMBER_OF_PORTS 4U
 /**********************************************************************
 * Typedefs
 **********************************************************************/
@@ -38,10 +28,21 @@
 */
 typedef enum
 {
-  LOW, /**< Defines digital state ground */
-  HIGH, /**< Defines digital state power */
-  MAX_DIO_PIN_STATE /**< Defines the maximum digital state */
-}DioPinState_t;
+	DIO_STATE_LOW, /**< Defines digital state ground */
+	DIO_STATE_HIGH, /**< Defines digital state power */
+	DIO_STATE_MAX /**< the maximum number of states */
+}DioState_t;
+
+/**
+ * Defines the possible directions of the pin
+ */
+typedef enum 
+{
+	DIO_DIR_INPUT, 
+	DIO_DIR_OUTPUT,
+	DIO_DIR_MAX,
+}DioDirection_t;
+
 /**
 * Defines an enumerated list of all the channels (pins) on the MCU
 * device. The last element is used to specify the maximum number of
@@ -49,6 +50,7 @@ typedef enum
 */
 typedef enum
 {
+	/* TODO: Populate this list based on available MCU pins */
   PORTA_0,
   PORTA_1,
   PORTA_2,
@@ -81,36 +83,8 @@ typedef enum
   PORTD_5,
   PORTD_6,
   PORTD_7,
-  DIO_MAX_PIN_NUMBER
+	DIO_CHANNEL_MAX
 }DioChannel_t;
-
-/**
-* Defines the possible DIO pin multiplexing values. The datasheet
-* should be reviewed for proper muxing options.
-*/
-typedef enum
-{
-  DIO_MAX_MODE
-}DioMode_t;
-
-/**
-* Defines the possible states of the channel pull-ups
-*/
-typedef enum
-{
-  PULLUP_DISABLED, /**< Used to disable the internal pull-ups */
-  PULLUP_ENABLED, /**< Used to enable the internal pull-ups */
-  MAX_RESISTOR /**< Resistor states should be below this value */
-}DioResistor_t;
-
-/**
- * Defines the possible directions of the pin
- */
-typedef enum 
-{
-  INPUT,
-  OUTPUT
-}DioDirection_t;
 
 /**
 * Defines the digital input/output configuration table’s elements that are used
@@ -118,20 +92,10 @@ typedef enum
 */
 typedef struct
 {
-  DioChannel_t Channel; /**< The I/O pin */
-  DioResistor_t Resistor; /**< ENABLED or DISABLED */
-  DioDirection_t Direction; /**< OUTPUT or INPUT */
-  DioPinState_t Data; /**< HIGH or LOW */
+	DioChannel_t Channel; /**< The I/O pin */
+	DioDirection_t Direction; /**< OUTPUT or INPUT */
+	DioState_t Data; /**< DIO_STATE_HIGH or DIO_STATE_LOW */
 }DioConfig_t;
-
-/**
-* The speed of the output changing state.
-*/
-typedef enum
-{
-  FAST, /**< Fast slew rate is configured on the corresponding pin, */
-  SLOW /**< Slow slew rate is configured on the corresponding pin, */
-}DioSlew_t;
 
 /**********************************************************************
 * Function Prototypes
@@ -146,5 +110,5 @@ const DioConfig_t* Dio_ConfigGet(void);
 } // extern "C"
 #endif
 
-#endif /*DIO_H_*/
-/***End of File****************************************************/
+#endif /* DIO_CFG_H_*/
+/************************* END OF FILE ********************************/

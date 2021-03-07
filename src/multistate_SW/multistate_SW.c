@@ -22,7 +22,7 @@ static MSSWConfig_t * gConfig; /**< a configuration pointer to the configuration
 /**********************************************************************
 * Function Prototypes
 **********************************************************************/
-static void MSSW_FSM(DioPinState_t PinValue, MSSWState_t* State, uint16_t* Counter);
+static void MSSW_FSM(DioState_t PinValue, MSSWState_t* State, uint16_t* Counter);
 /**********************************************************************
 * Function Definitions
 **********************************************************************/
@@ -133,7 +133,7 @@ MSSW_Update(void)
 {
   for(uint8_t i = 0; i < MAX_MSSW_NUM; i++)
     {
-      DioPinState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
+      DioState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
       MSSW_FSM(PinState, &(gConfig[i].State), &(gConfig[i].Counter));
     }
 }
@@ -148,12 +148,12 @@ MSSW_Update(void)
 * @param state a pointer to the state of the switch
 **********************************************************************/
 static void 
-MSSW_FSM(DioPinState_t PinValue, MSSWState_t* State, uint16_t* Counter)
+MSSW_FSM(DioState_t PinValue, MSSWState_t* State, uint16_t* Counter)
 {
   if(!(State != 0x0 &&
   Counter != 0x0 &&
   *State < MAX_MSSW_STATE &&
-  PinValue < MAX_DIO_PIN_STATE))
+  PinValue < DIO_STATE_MAX))
     {
       //TODO:choose your error handling method
       return;

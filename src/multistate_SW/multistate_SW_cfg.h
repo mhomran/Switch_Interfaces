@@ -10,8 +10,8 @@
 /**********************************************************************
 * Preprocessor Constants
 **********************************************************************/
-#define MSSW_PRESSED_LEVEL LOW
-#define MSSW_RELEASED_LEVEL HIGH
+#define MSSW_PRESSED_LEVEL DIO_STATE_LOW
+#define MSSW_RELEASED_LEVEL DIO_STATE_HIGH
 /**********************************************************************
 * Includes
 **********************************************************************/

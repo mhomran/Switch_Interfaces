@@ -21,7 +21,7 @@ static SWConfig_t * gConfig;
 /**********************************************************************
 * Function Prototypes
 **********************************************************************/
-static void SW_FSM(DioPinState_t PinValue, SWState_t* State);
+static void SW_FSM(DioState_t PinValue, SWState_t* State);
 /**********************************************************************
 * Function Definitions
 **********************************************************************/
@@ -93,11 +93,11 @@ SW_SetState(SW_t Index, SWState_t State)
 * @param state a pointer to the state of the switch
 **********************************************************************/
 static void 
-SW_FSM(DioPinState_t PinValue, SWState_t* State)
+SW_FSM(DioState_t PinValue, SWState_t* State)
 {
   if(!(State != 0x0 &&
   *State < MAX_SW_STATE &&
-  PinValue < MAX_DIO_PIN_STATE))
+  PinValue < DIO_STATE_MAX))
     {
       //TODO:choose your error handling method
       return;
@@ -162,7 +162,7 @@ void
 SW_Update(void) {
   for(uint8_t i = 0; i < MAX_SW_NUM; i++)
     {
-      DioPinState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
+      DioState_t PinState = Dio_ChannelRead(gConfig[i].Channel);
       SW_FSM(PinState, &(gConfig[i].State));
     }
 }

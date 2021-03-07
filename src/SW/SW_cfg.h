@@ -10,8 +10,8 @@
 /**********************************************************************
 * Preprocessor Constants
 **********************************************************************/
-#define SW_PRESSED_LEVEL LOW
-#define SW_RELEASED_LEVEL HIGH
+#define SW_PRESSED_LEVEL DIO_STATE_LOW
+#define SW_RELEASED_LEVEL DIO_STATE_HIGH
 /**********************************************************************
 * Includes
 **********************************************************************/

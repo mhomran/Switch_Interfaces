@@ -21,15 +21,15 @@
 extern "C"{
 #endif
 
-void Dio_Init(const DioConfig_t * const Config);
+extern void Dio_Init(const DioConfig_t * const Config);
 
-DioState_t Dio_ChannelRead(DioChannel_t Channel);
-void Dio_ChannelWrite(DioChannel_t Channel, DioState_t State);
+extern DioState_t Dio_ChannelRead(DioChannel_t Channel);
+extern void Dio_ChannelWrite(DioChannel_t Channel, DioState_t State);
 
-void Dio_SetChannelDirection(DioChannel_t Channel, DioDirection_t Direction);
+extern void Dio_SetChannelDirection(DioChannel_t Channel, DioDirection_t Direction);
 
-void Dio_RegisterWrite(uint8_t volatile * const Address, uint8_t Value);
-const volatile uint8_t Dio_RegisterRead(const volatile uint8_t * const Address);
+extern void Dio_RegisterWrite(uint8_t volatile * const Address, uint8_t Value);
+extern const volatile uint8_t Dio_RegisterRead(const volatile uint8_t * const Address);
 
 
 #ifdef __cplusplus

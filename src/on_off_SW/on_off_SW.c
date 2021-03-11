@@ -29,7 +29,7 @@ static void OnOffSW_FSM(SWState_t, uint8_t);
 * @param Config a pointer to the configuration table of the switches.
 * @return void 
 **********************************************************************/
-void 
+extern void 
 OnOffSW_Init(const OnOffSWConfig_t * const Config)
 {
   if(Config == 0x0)
@@ -51,7 +51,7 @@ OnOffSW_Init(const OnOffSWConfig_t * const Config)
  * @param Index the idnex of the switch
  * @return OnOffSWState_t the state of the switch
  */
-OnOffSWState_t
+extern OnOffSWState_t
 OnOffSW_GetState(OnOffSW_t Index)
 {
   if(!(Index < MAX_ON_OFF_SW_NUM))
@@ -68,7 +68,7 @@ OnOffSW_GetState(OnOffSW_t Index)
  * @param Index the index of the switch
  * @param State the state of the switch
  */
-void
+extern void
 OnOffSW_SetState(OnOffSW_t Index, OnOffSWState_t State)
 {
   if(!(State < MAX_ON_OFF_SW_STATE && Index < MAX_ON_OFF_SW_NUM))
@@ -134,7 +134,7 @@ OnOffSW_FSM(SWState_t SwState, uint8_t SwIndex)
 *
 * @see OnOffSW_Init
 **********************************************************************/
-void 
+extern void 
 OnOffSW_Update(void)
 {
   for(int i = 0; i < MAX_ON_OFF_SW_NUM; i++)

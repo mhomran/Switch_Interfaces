@@ -21,7 +21,7 @@ static MSSWConfig_t SWConfig[MAX_MSSW_NUM] = {
 /**
  * @brief return the configuration structure holding the configuration table of the module
  */
-MSSWConfig_t *const 
+extern MSSWConfig_t *const 
 MSSW_GetConfig(void) 
 {
   return SWConfig;

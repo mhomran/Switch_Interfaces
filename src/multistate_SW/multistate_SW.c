@@ -34,7 +34,7 @@ static void MSSW_FSM(DioState_t PinValue, MSSWState_t* State, uint16_t* Counter)
 * @param Config a pointer to the configuration table of the switches.
 * @return void 
 **********************************************************************/
-void 
+extern void 
 MSSW_Init(const MSSWConfig_t * const Config)
 {
   if(Config == 0x0)
@@ -57,7 +57,7 @@ MSSW_Init(const MSSWConfig_t * const Config)
  * @param Index the index of a switch inside the configuration table.
  * @return MSSWState_t The state of the switch
  */
-MSSWState_t
+extern MSSWState_t
 MSSW_GetState(MSSW_t Index) 
 {
   if(!(Index < MAX_MSSW_NUM))
@@ -74,7 +74,7 @@ MSSW_GetState(MSSW_t Index)
  * @param Index the index of a switch inside the configuration table.
  * @param State The state of the switch
  */
-void 
+extern void 
 MSSW_SetState(MSSW_t Index, MSSWState_t State) 
 {
   if(!(State < MAX_MSSW_STATE && Index < MAX_MSSW_NUM))
@@ -91,7 +91,7 @@ MSSW_SetState(MSSW_t Index, MSSWState_t State)
  * @param Index the index of a switch inside the configuration table.
  * @return uint16_t the switch pressed time in ticks
  */
-uint16_t
+extern uint16_t
 MSSW_GetCounter(MSSW_t Index) 
 {
   if(!(Index < MAX_MSSW_NUM))
@@ -108,7 +108,7 @@ MSSW_GetCounter(MSSW_t Index)
  * @param Index the index of a switch inside the configuration table.
  * @param Counter the switch pressed time in ticks
  */
-void 
+extern void 
 MSSW_SetCounter(MSSW_t Index, uint16_t Counter) 
 {
   if(!(Counter <= MSSW_LONGPRESSED_TICKS && Index < MAX_MSSW_NUM))
@@ -128,7 +128,7 @@ MSSW_SetCounter(MSSW_t Index, uint16_t Counter)
 *
 * @see MSSW_Init
 **********************************************************************/
-void
+extern void
 MSSW_Update(void)
 {
   for(uint8_t i = 0; i < MAX_MSSW_NUM; i++)

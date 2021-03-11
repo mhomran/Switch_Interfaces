@@ -44,7 +44,7 @@ typedef struct {
 /**********************************************************************
 * functions prototypes
 **********************************************************************/
-OnOffSWConfig_t *const OnOffSW_GetConfig(void);
+extern OnOffSWConfig_t *const OnOffSW_GetConfig(void);
 
 #endif
 /************************* END OF FILE ********************************/

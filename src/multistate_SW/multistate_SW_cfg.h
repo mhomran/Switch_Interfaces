@@ -56,7 +56,7 @@ typedef struct {
 /**********************************************************************
 * functions prototypes
 **********************************************************************/
-MSSWConfig_t *const MSSW_GetConfig(void);
+extern MSSWConfig_t *const MSSW_GetConfig(void);
 
 #endif
 /************************* END OF FILE ********************************/

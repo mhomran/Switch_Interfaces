@@ -49,7 +49,7 @@ typedef struct {
 /**********************************************************************
 * functions prototypes
 **********************************************************************/
-SWConfig_t *const SW_GetConfig(void);
+extern SWConfig_t *const SW_GetConfig(void);
 
 #endif
 /************************* END OF FILE ********************************/

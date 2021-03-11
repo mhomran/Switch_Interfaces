@@ -104,7 +104,7 @@ typedef struct
 extern "C"{
 #endif
 
-const DioConfig_t* Dio_ConfigGet(void);
+extern const DioConfig_t* Dio_ConfigGet(void);
 
 #ifdef __cplusplus
 } // extern "C"

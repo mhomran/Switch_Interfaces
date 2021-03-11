@@ -20,7 +20,7 @@ static OnOffSWConfig_t SWConfig[MAX_ON_OFF_SW_NUM] = {
 /**
  * @brief return the configuration structure holding the configuration table of the module
  */
-OnOffSWConfig_t *const 
+extern OnOffSWConfig_t *const 
 OnOffSW_GetConfig(void) 
 {
   return SWConfig;

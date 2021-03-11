@@ -24,7 +24,7 @@ static SWConfig_t SWConfig[MAX_SW_NUM] = {
 /**
  * @brief return the configuration structure holding the configuration table of the module
  */
-SWConfig_t *const 
+extern SWConfig_t *const 
 SW_GetConfig(void) 
 {
   return SWConfig;

@@ -14,10 +14,10 @@
 /**********************************************************************
 * Function Prototypes
 **********************************************************************/
-void OnOffSW_Init(const OnOffSWConfig_t * const Config);
-void OnOffSW_Update(void);
-OnOffSWState_t OnOffSW_GetState(OnOffSW_t Index);
-void OnOffSW_SetState(OnOffSW_t Index, OnOffSWState_t State);
+extern void OnOffSW_Init(const OnOffSWConfig_t * const Config);
+extern void OnOffSW_Update(void);
+extern OnOffSWState_t OnOffSW_GetState(OnOffSW_t Index);
+extern void OnOffSW_SetState(OnOffSW_t Index, OnOffSWState_t State);
 
 #endif /* end ON_OFF_SW_H */
 /************************* END OF FILE ********************************/

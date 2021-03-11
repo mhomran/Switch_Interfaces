@@ -17,10 +17,10 @@
 /**********************************************************************
 * Function Prototypes
 **********************************************************************/
-void SW_Init(const SWConfig_t * const Config);
-SWState_t SW_GetState(SW_t Index);
-void SW_SetState(SW_t Index, SWState_t State);
-void SW_Update(void);
+extern void SW_Init(const SWConfig_t * const Config);
+extern SWState_t SW_GetState(SW_t Index);
+extern void SW_SetState(SW_t Index, SWState_t State);
+extern void SW_Update(void);
 
 #endif /* end SW_H_ */
 /************************* END OF FILE ********************************/

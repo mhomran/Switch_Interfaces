@@ -18,14 +18,14 @@
 /**********************************************************************
 * Function Prototypes
 **********************************************************************/
-void MSSW_Init(const MSSWConfig_t * const Config);
-void MSSW_Update(void);
+extern void MSSW_Init(const MSSWConfig_t * const Config);
+extern void MSSW_Update(void);
 
-MSSWState_t MSSW_GetState(MSSW_t Index);
-void MSSW_SetState(MSSW_t Index, MSSWState_t State);
+extern MSSWState_t MSSW_GetState(MSSW_t Index);
+extern void MSSW_SetState(MSSW_t Index, MSSWState_t State);
 
-uint16_t MSSW_GetCounter(MSSW_t Index);
-void MSSW_SetCounter(MSSW_t Index, uint16_t Counter);
+extern uint16_t MSSW_GetCounter(MSSW_t Index);
+extern void MSSW_SetCounter(MSSW_t Index, uint16_t Counter);
 
 #endif /* end MULTISTATE_SW_H_ */
 /************************* END OF FILE ********************************/

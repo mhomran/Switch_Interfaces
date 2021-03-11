@@ -33,7 +33,7 @@ static void SW_FSM(DioState_t PinValue, SWState_t* State);
 * @param Config a pointer to the configuration table of the switches.
 * @return void 
 **********************************************************************/
-void 
+extern void 
 SW_Init(const SWConfig_t * const Config)
 {
   if(Config == 0x0)
@@ -55,7 +55,7 @@ SW_Init(const SWConfig_t * const Config)
  * @param Index the index of a switch inside the configuration table.
  * @return SWState_t The state of the switch
  */
-SWState_t
+extern SWState_t
 SW_GetState(SW_t Index) 
 {
   if(!(Index < MAX_SW_NUM))
@@ -72,7 +72,7 @@ SW_GetState(SW_t Index)
  * @param Index the index of a switch inside the configuration table.
  * @param State The state of the switch
  */
-void 
+extern void 
 SW_SetState(SW_t Index, SWState_t State) 
 {
   if(!(State < MAX_SW_STATE && Index < MAX_SW_NUM))
@@ -158,7 +158,7 @@ SW_FSM(DioState_t PinValue, SWState_t* State)
 *
 * @see SW_Init
 **********************************************************************/
-void 
+extern void 
 SW_Update(void) {
   for(uint8_t i = 0; i < MAX_SW_NUM; i++)
     {
